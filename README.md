@@ -1,0 +1,2 @@
+# dm-git
+* Shortcut: dmg
