@@ -6,7 +6,7 @@ var job = {};
 
 // =========== [ job.start() ] ===========
 // config: {
-//      type: [ask|root]
+//      type: [ask|root],
 //      tree: [recursive|1|2|...]
 // }
 job.start = co.wrap(function*(config) {
@@ -18,9 +18,8 @@ job.start = co.wrap(function*(config) {
             "type": "ask"
         };
 
-
-        var test =  yield getGitPathes(configPathes);
-        console.log(test);
+        var pathes =  yield getGitPathes(configPathes);
+        console.log(pathes);
     } catch (e) {
         console.log("Filename: ", __filename, "\n", e.stack);
     }

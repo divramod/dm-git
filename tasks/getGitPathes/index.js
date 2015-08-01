@@ -17,11 +17,10 @@ job.start = co.wrap(function*(config) {
                 return false;
             }
         });
-        return pathes;
     } catch (e) {
         console.log("Filename: ", __filename, "\n", e.stack);
     }
-    return yield Promise.resolve();
+    return yield Promise.resolve(pathes);
 }); // job.start()
 
 // =========== [ MODULE EXPORT ] ===========
