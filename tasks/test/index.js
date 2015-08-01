@@ -1,30 +1,18 @@
 // =========== [ REQUIRE ] ===========
 var co = require("co");
-var inquirer = require("inquirer");
 
 // =========== [ MODULE DEFINE ] ===========
 var job = {};
 
 // =========== [ job.start() ] ===========
-// TODO
 job.start = co.wrap(function*() {
+    try {
+        console.log("start test");
 
-    var questions = [{
-        type: "input",
-        name: "q1",
-        message: "q1"
-    }, {
-        type: "input",
-        name: "q2",
-        message: "q2",
-        default: function() {
-            return "Doe";
-        }
-    }];
-
-    inquirer.prompt(questions, function(answers) {
-        console.log(JSON.stringify(answers, null, "  "));
-    });
+    } catch (e) {
+        console.log("Filename: ", __filename, "\n", e.stack);
+    }
+    return yield Promise.resolve();
 }); // job.start()
 
 // =========== [ MODULE EXPORT ] ===========
