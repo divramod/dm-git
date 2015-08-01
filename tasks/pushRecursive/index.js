@@ -18,8 +18,12 @@ job.start = co.wrap(function*(type, tree, path) {
             "type": "ask"
         };
 
-        var pathes =  yield getGitPathes(configPathes);
+        var pathes =
+            yield getGitPathes(configPathes);
         console.log(pathes);
+        pathes.forEach(function(path) {
+
+        });
     } catch (e) {
         console.log("Filename: ", __filename, "\n", e.stack);
     }
