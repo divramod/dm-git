@@ -27,11 +27,6 @@ jobs.index = co.wrap(function*() {
             var task = require("./tasks/pushRecursive/index.js");
             yield task.start(module_path);
         }
-        // =========== [ config file add ] ===========
-        else if (["config", "configFileAdd", "c", "-c"].indexOf(argv2) > -1) {
-            var task = require("./tasks/configFileAdd/index.js");
-            yield task.start(module_path);
-        }
         // =========== [ help ] ===========
         else {
             var task = require("./tasks/help/index.js");

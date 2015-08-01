@@ -9,7 +9,7 @@ var job = {};
 //      type: [ask|root],
 //      tree: [recursive|1|2|...]
 // }
-job.start = co.wrap(function*(config) {
+job.start = co.wrap(function*(type, tree, path) {
     try {
         var getGitPathes = require("./../getGitPathes/index.js").start;
         //console.log("start pushRecursive");
