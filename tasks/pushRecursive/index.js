@@ -1,8 +1,8 @@
 // =========== [ REQUIRE ] ===========
 var co = require("co");
 var dmPrompt = require("dm-prompt").Inquirer;
-var getGitPathes = require(process.cwd() + "/tasks/getGitPathes/index.js").start;
-var getGitStatus = require(process.cwd() + "/jobs/status/index.js").start;
+var getGitPathes = require(__dirname + "/../getGitPathes/index.js").start;
+var getGitStatus = require(__dirname + "/../../jobs/status/index.js").start;
 var inquirer = require("inquirer");
 var colors = require("colors");
 require("shelljs/global");
