@@ -17,6 +17,7 @@ var job = {};
 // }
 job.start = co.wrap(function*(type, tree, path) {
     try {
+        //TODO get pathes from ~/.dm-git or read it
         var configPathes = {
             "path": "~/code/dm",
             "type": "ask"
@@ -28,29 +29,27 @@ job.start = co.wrap(function*(type, tree, path) {
         for (var i = 0, l = pathes.length; i < l; i++) {
             var path = pathes[i];
             console.log(path.green);
-            if (path.indexOf("dm-git") > -1) {
-                var gitStatus =
-                    yield getGitStatus(path);
+            var gitStatus =
+                yield getGitStatus(path);
 
-                if (gitStatus.changesNotStaged) {
-                    console.log(gitStatus.output);
-                    var commitMessageAnswer =
-                        yield dmPrompt({
-                            type: "input",
-                            name: "commitMessage",
-                            message: "Please enter your commit commitMessage:"
-                        });
-
-                    var commitMessage = commitMessageAnswer.commitMessage;
-
-                    exec('cd ' + path + ' && git add -A && git commit -m "' + commitMessage + '"', {
-                        silent: false
+            if (gitStatus.changesNotStaged) {
+                console.log(gitStatus.output);
+                var commitMessageAnswer =
+                    yield dmPrompt({
+                        type: "input",
+                        name: "commitMessage",
+                        message: "Please enter your commit commitMessage:"
                     });
 
-                    exec('git push -u origin HEAD', {
-                      silent: false
-                    });
-                }
+                var commitMessage = commitMessageAnswer.commitMessage;
+
+                exec('cd ' + path + ' && git add -A && git commit -m "' + commitMessage + '"', {
+                    silent: false
+                });
+
+                exec('git push -u origin HEAD', {
+                    silent: false
+                });
             }
         }
 
