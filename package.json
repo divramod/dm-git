@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "co": "^4.4.0",
+    "co-foreach": "^1.0.6",
     "co-prompt": "^1.0.0",
     "colors": "~1.0.3",
     "commander": "^2.6.0",
