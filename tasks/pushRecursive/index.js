@@ -4,7 +4,7 @@ var dmPrompt = require("dm-prompt").Inquirer;
 var getGitPathes = require(process.cwd() + "/tasks/getGitPathes/index.js").start;
 var getGitStatus = require(process.cwd() + "/jobs/status/index.js").start;
 var inquirer = require("inquirer");
-//var dmStatus = require("./../jobs/status/index.js");
+var colors = require("colors");
 require("shelljs/global");
 
 // =========== [ MODULE DEFINE ] ===========
@@ -17,7 +17,6 @@ var job = {};
 // }
 job.start = co.wrap(function*(type, tree, path) {
     try {
-        //console.log("start pushRecursive");
         var configPathes = {
             "path": "~/code/dm",
             "type": "ask"
@@ -28,6 +27,7 @@ job.start = co.wrap(function*(type, tree, path) {
 
         for (var i = 0, l = pathes.length; i < l; i++) {
             var path = pathes[i];
+            console.log(path.green);
             if (path.indexOf("dm-git") > -1) {
                 var gitStatus =
                     yield getGitStatus(path);
