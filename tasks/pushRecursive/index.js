@@ -46,6 +46,10 @@ job.start = co.wrap(function*(type, tree, path) {
                     exec('cd ' + path + ' && git add -A && git commit -m "' + commitMessage + '"', {
                         silent: false
                     });
+
+                    exec('git push -u origin HEAD', {
+                      silent: false
+                    });
                 }
             }
         }
