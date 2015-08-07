@@ -2,6 +2,7 @@
 var co = require("co");
 var dmPrompt = require("dm-prompt").Inquirer;
 var getGitPathes = require(__dirname + "/../getGitPathes/index.js").start;
+var getConfigFile = require(__dirname + "/../getConfigFile/index.js").start;
 var getGitStatus = require(__dirname + "/../../jobs/status/index.js").start;
 var inquirer = require("inquirer");
 var colors = require("colors");
@@ -18,10 +19,14 @@ var job = {};
 job.start = co.wrap(function*(type, tree, path) {
     try {
         //TODO get pathes from ~/.dm-git or read it
-        var configPathes = {
+
+        var myPathes = [{
             "path": "~/code/dm",
-            "type": "ask"
-        };
+            "recursive": true
+        }, {
+            "path": "~/dotfiles"
+        }];
+        var configPathes = getConfigFile().pushRecursive.pathes;
 
         var pathes =
             yield getGitPathes(configPathes);

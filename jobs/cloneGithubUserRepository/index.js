@@ -15,15 +15,25 @@ job.start = co.wrap(function*() {
         if (test("-f", configFilePath)) {
             var config = JSON.parse(fs.readFileSync(configFilePath, 'utf8'));
             if (config) {
-                if (config.github.user) {
-                    var user = config.github.user;
-                    console.log(user);
+                if (config.cloneGithubUserRepository.user) {
+                    var user = config.cloneGithubUserRepository.user;
                     if (user && argv3) {
-                        exec('git clone https://github.com/' + user + '/' + argv3 + '.git', {
+                        if (argv3) {
+                            var repository = argv3;
+                        } else {
+
+                            var repositoryAnswer =
+                                yield dmPrompt({
+                                    type: "input",
+                                    name: "repository",
+                                    message: "What is your repository name:"
+                                });
+                            var repository = repositoryAnswer.repository;
+                        }
+                        exec('git clone https://github.com/' + user + '/' + repository + '.git', {
                             silent: false
                         });
                     }
-
                 }
             }
         }
