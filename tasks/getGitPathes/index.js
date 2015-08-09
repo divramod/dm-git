@@ -9,7 +9,7 @@ var job = {};
 // =========== [ job.start() ] ===========
 // path format
 // { "path": "~/some/path", "recursive": [true|false] }
-job.start = co.wrap(function*(pathes) {
+job.start = co.wrap(function*(pathes, exclude) {
     try {
 
         var gitPathes = [];
@@ -22,7 +22,15 @@ job.start = co.wrap(function*(pathes) {
                 if (recursive) {
                     var foundGitPathes = find(path).filter(function(file) {
                         var gitPath = file + "/" + ".git";
-                        if (test("-d", gitPath) && gitPath.indexOf("node_modules") === -1) {
+                        if (exclude) {
+                            for (var i = 0, l = exclude.length; i < l; i++) {
+                                var ex = exclude[i];
+                                if (gitPath.indexOf(ex) > -1) {
+                                    return false;
+                                }
+                            }
+                        }
+                        if (test("-d", gitPath)) {
                             return true;
                         } else {
                             return false;

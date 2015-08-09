@@ -26,10 +26,14 @@ job.start = co.wrap(function*(type, tree, path) {
         }, {
             "path": "~/dotfiles"
         }];
+
+        var config = getConfigFile();
+        
         var configPathes = getConfigFile().pushRecursive.pathes;
+        var exclude = getConfigFile().pushRecursive.exclude || undefined;
 
         var pathes =
-            yield getGitPathes(configPathes);
+            yield getGitPathes(configPathes, exclude);
 
         for (var i = 0, l = pathes.length; i < l; i++) {
             var path = pathes[i];
