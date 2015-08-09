@@ -58,7 +58,7 @@ job.start = co.wrap(function*(type, tree, path) {
                     silent: false
                 });
 
-                exec('git push -u origin HEAD', {
+                exec('cd ' + path + ' && git push -u origin HEAD', {
                     silent: false
                 });
             }
