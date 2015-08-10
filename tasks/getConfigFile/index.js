@@ -1,6 +1,7 @@
 // =========== [ REQUIRE ] ===========
 var co = require("co");
 var fs = require("fs");
+var dmUtil = require("dm-util");
 
 // =========== [ MODULE DEFINE ] ===========
 var job = {};
@@ -28,17 +29,17 @@ var job = {};
 // }
 job.start = function() {
     try {
-        var configFilePath = env["HOME"] + '/.dm-git.json';
-        if (test("-f", configFilePath)) {
-            var config = JSON.parse(fs.readFileSync(configFilePath, 'utf8'));
-        } else {
-            var config = false;
-        }
-
+        var configFilePath = '~/.dm-git.json';
+        var config = dmUtil.getJsonFromFile(configFilePath);
     } catch (e) {
         console.log("Filename: ", __filename, "\n", e.stack);
     }
-    return config;
+
+    if (config.data) {
+        return config.data;
+    } else {
+        return false;
+    }
 }; // job.start()
 
 // =========== [ MODULE EXPORT ] ===========

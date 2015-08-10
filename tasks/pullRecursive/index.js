@@ -28,7 +28,6 @@ job.start = co.wrap(function*(type, tree, path) {
         }];
 
         var config = getConfigFile();
-        console.log(config);
 
         var configPathes = getConfigFile().pushRecursive.pathes;
         var exclude = getConfigFile().pushRecursive.exclude || undefined;
@@ -38,31 +37,12 @@ job.start = co.wrap(function*(type, tree, path) {
 
         for (var i = 0, l = pathes.length; i < l; i++) {
             var path = pathes[i];
-            var gitStatus =
-                yield getGitStatus(path);
 
-            if (!gitStatus.changesNotStaged) {
-                console.log(path.green);
-            } else {
-                console.log(path.yellow);
-                console.log(gitStatus.output);
-                var commitMessageAnswer =
-                    yield dmPrompt({
-                        type: "input",
-                        name: "commitMessage",
-                        message: "Please enter your commit commitMessage:"
-                    });
+            console.log(path.yellow);
 
-                var commitMessage = commitMessageAnswer.commitMessage;
-
-                exec('cd ' + path + ' && git add -A && git commit -m "' + commitMessage + '"', {
-                    silent: false
-                });
-
-                exec('cd ' + path + ' && git push -u origin HEAD', {
-                    silent: false
-                });
-            }
+            exec('cd ' + path + ' && git push -u origin HEAD', {
+                silent: false
+            });
         }
 
     } catch (e) {

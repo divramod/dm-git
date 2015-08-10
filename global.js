@@ -28,8 +28,13 @@ jobs.index = co.wrap(function*() {
             yield task.start();
         }
         // =========== [ pushRecursive ] ===========
-        else if (["pushRecursive", "push", "p", "-p"].indexOf(argv2) > -1) {
+        else if (["pushRecursive", "push"].indexOf(argv2) > -1) {
             var task = require("./tasks/pushRecursive/index.js");
+            yield task.start(module_path);
+        }
+        // =========== [ pushRecursive ] ===========
+        else if (["pullRecursive", "pull"].indexOf(argv2) > -1) {
+            var task = require("./tasks/pullRecursive/index.js");
             yield task.start(module_path);
         }
         // =========== [ help ] ===========
