@@ -18,14 +18,6 @@ var job = {};
 // }
 job.start = co.wrap(function*(type, tree, path) {
     try {
-        //TODO get pathes from ~/.dm-git or read it
-
-        var myPathes = [{
-            "path": "~/code/dm",
-            "recursive": true
-        }, {
-            "path": "~/dotfiles"
-        }];
 
         var config = getConfigFile();
 
@@ -40,7 +32,7 @@ job.start = co.wrap(function*(type, tree, path) {
 
             console.log(path.yellow);
 
-            exec('cd ' + path + ' && git push -u origin HEAD', {
+            exec('cd ' + path + ' && git pull', {
                 silent: false
             });
         }
