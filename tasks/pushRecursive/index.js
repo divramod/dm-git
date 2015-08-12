@@ -41,7 +41,7 @@ job.start = co.wrap(function*(type, tree, path) {
             var gitStatus =
                 yield getGitStatus(path);
 
-            if (!gitStatus.changesNotStaged) {
+            if (gitStatus.nothingToCommit) {
                 console.log(path.green);
             } else {
                 console.log(path.yellow);
