@@ -37,6 +37,11 @@ jobs.index = co.wrap(function*() {
             var task = require("./tasks/pullRecursive/index.js");
             yield task.start(module_path);
         }
+        // =========== [ pushRecursive ] ===========
+        else if (["commit", "c"].indexOf(argv2) > -1) {
+            var task = require("./tasks/commit/index.js");
+            yield task.start();
+        }
         // =========== [ help ] ===========
         else {
             var task = require("./tasks/help/index.js");
