@@ -1,6 +1,10 @@
-var jobs = {};
+var tasks = {};
 
-jobs.status = require("./jobs/status/index.js").start;
-jobs.commit = require("./tasks/commit/index.js").start;
+// example
+tasks.test = require("./tasks/test/index.js").start;
+tasks.status = require("./jobs/status/index.js").start;
+tasks.commit = require("./tasks/commit/index.js").start;
 
-module.exports = jobs;
+// automatically add tasks here
+
+module.exports = tasks;

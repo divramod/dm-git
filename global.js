@@ -27,6 +27,18 @@ jobs.index = co.wrap(function*() {
             var task = require("./tasks/test/index.js");
             yield task.start();
         }
+        // =========== [ todo ] ===========
+        else if (["todo"].indexOf(argv2) > -1) {
+            require("dm-npm").todo(__dirname);
+        }
+        // =========== [ idea ] ===========
+        else if (["idea"].indexOf(argv2) > -1) {
+            require("dm-npm").idea(__dirname);
+        }
+        // =========== [ prompt ] ===========
+        else if (["prompt","p"].indexOf(argv2) > -1) {
+            require("dm-npm").prompt(__dirname);
+        }
         // =========== [ pushRecursive ] ===========
         else if (["pushRecursive", "push"].indexOf(argv2) > -1) {
             var task = require("./tasks/pushRecursive/index.js");
@@ -42,6 +54,10 @@ jobs.index = co.wrap(function*() {
             var task = require("./tasks/commit/index.js");
             yield task.start();
         }
+
+        // automatically add tasks here
+
+
         // =========== [ help ] ===========
         else {
             var task = require("./tasks/help/index.js");
