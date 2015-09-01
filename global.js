@@ -1,9 +1,5 @@
-var colors = require("colors");
 var co = require("co");
-require("shelljs/global");
 var jobs = {};
-var result = {};
-var module_path = __dirname;
 
 // =========== [ job.index() ] ===========
 jobs.index = co.wrap(function*() {
@@ -12,32 +8,10 @@ jobs.index = co.wrap(function*() {
         // =========== [ get params from user input ] ===========
         var argv2 = process.env.dmnJob || process.argv[2] || "help";
 
-        // =========== [ help ] ===========
-        if (["help", "-help", "h", "-h"].indexOf(argv2) > -1) {
-            var task = require("./tasks/help/index.js");
-            yield task.start(module_path);
-        }
         // =========== [ clone github user repository ] ===========
-        else if (["c", "clone"].indexOf(argv2) > -1) {
+        if (["c", "clone"].indexOf(argv2) > -1) {
             var job = require("./jobs/cloneGithubUserRepository/index.js");
             yield job.start(module_path);
-        }
-        // =========== [ test ] ===========
-        else if (["test", "-test", "t", "-t"].indexOf(argv2) > -1) {
-            var task = require("./tasks/test/index.js");
-            yield task.start();
-        }
-        // =========== [ todo ] ===========
-        else if (["todo"].indexOf(argv2) > -1) {
-            require("dm-npm").todo(__dirname);
-        }
-        // =========== [ idea ] ===========
-        else if (["idea"].indexOf(argv2) > -1) {
-            require("dm-npm").idea(__dirname);
-        }
-        // =========== [ prompt ] ===========
-        else if (["prompt","p"].indexOf(argv2) > -1) {
-            require("dm-npm").prompt(__dirname);
         }
         // =========== [ pushRecursive ] ===========
         else if (["pushRecursive", "push"].indexOf(argv2) > -1) {
@@ -60,16 +34,16 @@ jobs.index = co.wrap(function*() {
 
         // =========== [ help ] ===========
         else {
-            var task = require("./tasks/help/index.js");
-            yield task.start(module_path);
+            require("dm-npm").getCommonTasks(argv2, __dirname);
         }
 
     } catch (e) {
         console.log("Filename: ", __filename, "\n", e.stack);
     }
 
-    return Promise.resolve(result);
+    return Promise.resolve();
 }); // job.index()
+
 
 // =========== [ MODULE EXPORT ] ===========
 module.exports = jobs;
