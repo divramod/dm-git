@@ -3,7 +3,7 @@ var co = require("co");
 var dmPrompt = require("dm-prompt").Inquirer;
 var getGitPathes = require(__dirname + "/../getGitPathes/index.js").start;
 var getConfigFile = require(__dirname + "/../getConfigFile/index.js").start;
-var getGitStatus = require(__dirname + "/../../jobs/status/index.js").start;
+var getGitStatus = require(__dirname + "/../status/index.js").start;
 var inquirer = require("inquirer");
 var colors = require("colors");
 require("shelljs/global");
